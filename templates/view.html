@@ -1,0 +1,51 @@
+<head>
+
+<!-- Set table border style -->
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+</style>
+</head>
+
+<h1>Inventory:</h1>
+
+<!-- Create table for displaying all inventory items -->
+<!-- Retrieve items from database -->
+<table>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Product Quantity</th>
+    <th>Product Price</th>
+    {% for item in all_inventory %}
+    <tr>
+        <td style="text-align: left">{{item.product_id}}</td>
+        <td style="text-align: left">{{item.product_name}}</td>
+        <td style="text-align: right">{{item.product_quantity}}</td>
+        <td style="text-align: right">${{item.product_price}}</td>
+        <td>
+            <form action="/get/{{item.id}}/" style="display: inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Edit"/>
+            </form>
+        </td>
+        <td>
+            <form action="/delete/{{item.id}}/" style="display: inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+<!-- Upon clicking 'Add item', launch the site's 'add' page and function -->
+<form action="/add/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Add item"/>
+</form>
+
+<!-- Upon clicking 'Download', launch the site's 'download' page and function -->
+<form action="/download/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Download"/>
+</form>

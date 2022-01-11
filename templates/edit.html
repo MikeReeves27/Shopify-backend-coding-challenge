@@ -1,0 +1,38 @@
+<h1>Edit item:</h1>
+
+<!-- Declare function that displays a popup once the user successfully updates an item -->
+<script>
+    function item_updated() {
+        alert("Item Updated!");
+    }
+</script>
+
+<!-- Create a form that allows the user to update data for an existing inventory item -->
+<!-- Current data is retrieved from database -->
+<form action="/edit/{{item.id}}/" style="display: inline;" method="post" onsubmit="item_updated()">{% csrf_token %}
+    <table>
+        <tr>
+            <td>Product ID:</td>
+            <td><input type="text" value="{{item.product_id}}" name="product_id"/></td>
+        </tr>
+        <tr>
+            <td>Product Name:</td>
+            <td><input type="text" value="{{item.product_name}}" name="product_name"/></td>
+        </tr>
+        <tr>
+            <td>Product Quantity:</td>
+            <td><input type="number" value="{{item.product_quantity}}" name="product_quantity"/></td>
+        </tr>
+        <tr>
+            <td>Product Price:</td>
+            <td><input type="number" value="{{item.product_price}}" name="product_price"/></td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" value="Update"/>
+</form>
+
+<!-- Upon clicking 'Back', go back to the site's root page -->
+<form action="/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Back"/>
+</form>

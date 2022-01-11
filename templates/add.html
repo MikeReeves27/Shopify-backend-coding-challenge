@@ -1,0 +1,37 @@
+<h1>Add item:</h1>
+
+<!-- Declare function that displays a popup once the user successfully adds an item -->
+<script>
+    function item_added() {
+        alert("Item added!");
+    }
+</script>
+
+<!-- Create a form that allows the user to enter data for a new inventory item -->
+<form action="/save/" style="display: inline;" method="post" onsubmit="item_added()">{% csrf_token %}
+    <table>
+        <tr>
+            <td>Product ID:</td>
+            <td><input type="text" name="product_id"/></td>
+        </tr>
+        <tr>
+            <td>Product Name:</td>
+            <td><input type="text" name="product_name"/></td>
+        </tr>
+        <tr>
+            <td>Product Quantity:</td>
+            <td><input type="number" name="product_quantity" title="Can only be digits"/></td>
+        </tr>
+        <tr>
+            <td>Product Price:</td>
+            <td><input type="number" name="product_price" title="Can only be digits"/></td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" value="Save"/>
+</form>
+
+<!-- Upon clicking 'Back', go back to the site's root page -->
+<form action="/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Back"/>
+</form>
